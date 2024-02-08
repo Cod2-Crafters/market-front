@@ -17,8 +17,8 @@ export default function Home() {
     const handleGetReviews = () => {
         // Client-side request are mocked by `mocks/browser.ts`.
         fetch('/api/users')
-            .then(res => res.json())
-            .then(data => console.log('outputdata', data));
+            .then((res) => res.json())
+            .then((data) => console.log('outputdata', data));
     };
 
     return (
