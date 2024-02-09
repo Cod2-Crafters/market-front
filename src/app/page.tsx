@@ -1,5 +1,5 @@
 'use client';
-import initMocks from '@/mocks';
+import initMocks from '@/services/mocks';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useState } from 'react';
