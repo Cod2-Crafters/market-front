@@ -22,6 +22,16 @@ const config: Config = {
             secondary: {
                 DEFAULT: '#75cb76',
             },
+            gray: {
+                '10': '#3A3A3A',
+                '20': '#5A5A5A',
+                '30': '#858585',
+                '40': '#ABABAB',
+                '50': '#C3C3C3',
+                '60': '#D9D9D9',
+                '70': '#E2E2E2',
+                '80': '#E8E8E8',
+            },
 
             //  기본 컬러모음 (사용 가능, 이외 사용 불가)
             indigo: colors.indigo,
@@ -37,6 +47,35 @@ const config: Config = {
             '60': '0.6',
             '80': '0.8',
             '100': '1',
+        },
+        spacing: {
+            none: '0',
+            '1': '0.1rem',
+            '2': '0.2rem',
+            '4': '0.4rem',
+            '5': '0.5rem',
+            '0.8': '0.8rem',
+            '10': '1.0rem',
+            '12': '1.2rem',
+            '15': '1.5rem',
+            '20': '2.0rem',
+            '22': '2.2rem',
+            '25': '2.5rem',
+            '27': '2.7rem',
+            '30': '3.0rem',
+            '36': '3.6rem',
+            '48': '4.8rem',
+            '96': '9.6rem',
+        },
+        fontSize: {
+            base: '1.4rem' /* default dsize, same md */,
+            sm: '1.2rem',
+            md: '1.4rem',
+            lg: '1.6rem',
+            xl: '1.8rem',
+            '2xl': '2.4rem',
+            '3xl': '3.6rem',
+            '4xl': '4.8rem',
         },
         extend: {
             backgroundImage: {
