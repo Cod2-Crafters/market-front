@@ -22,6 +22,16 @@ const config: Config = {
             secondary: {
                 DEFAULT: '#75cb76',
             },
+            gray: {
+                '10': '#3A3A3A',
+                '20': '#5A5A5A',
+                '30': '#858585',
+                '40': '#ABABAB',
+                '50': '#C3C3C3',
+                '60': '#D9D9D9',
+                '70': '#E2E2E2',
+                '80': '#E8E8E8',
+            },
 
             //  기본 컬러모음 (사용 가능, 이외 사용 불가)
             indigo: colors.indigo,
