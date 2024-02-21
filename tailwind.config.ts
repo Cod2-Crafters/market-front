@@ -7,6 +7,7 @@ const config: Config = {
         './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+        './src/features/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     theme: {
         // 컬러 재정의, 존재하는 컬러만 사용함 (인텔리센스에 영향)
