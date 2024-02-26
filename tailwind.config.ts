@@ -21,9 +21,12 @@ const config: Config = {
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
+            unset: 'unset',
+            inherit: 'inherit',
             black: '#000',
             white: '#fff',
             // 커스텀 컬러 모음
+
             primary: {
                 DEFAULT: 'rgb(var(--primary))',
                 foreground: 'rgb(var(--primary-foreground))',
