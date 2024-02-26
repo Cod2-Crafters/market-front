@@ -1,4 +1,5 @@
 import ImageSlide from "@/components/Products/imageSlide";
+import RecommandSlide from "@/components/Products/recommandSlide";
 
 
 
@@ -19,8 +20,23 @@ function ProductsClient() {
                                 <span className="text-[28px] font-[400] ml-[5px]">원</span>
                             </div>
                         </div>
+                        <div className="h-[30px] mt-[15px] mb-[25px] flex justify-between" >
+                            <div className="flex items-center h-full">
+                                <div className="flex items-center h-full">
+                                    찜
+                                </div>
+                                <div className="flex items-center h-full">
+                                    조회수
+                                </div>
+                                <div className="flex items-center h-full">
+                                    업로드날짜
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <RecommandSlide />
+
             </div>
         </main >
     )

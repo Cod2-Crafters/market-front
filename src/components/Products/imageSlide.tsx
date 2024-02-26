@@ -1,5 +1,5 @@
 "use client"
-import useImageSlider from "@/hooks/useImageSlider";
+import useImageSlider from "@/hooks/Products/useImageSlider";
 
 
 function ImageSlide() {
@@ -16,14 +16,11 @@ function ImageSlide() {
 
     return (
         <div className="w-[430px] h-[430px] mr-10 flex-shrink-0">
-
             <div className="w-full h-full border border-[#eeeeeee] relative">
                 <div className="w-full h-full relative">
                     {images.map((image: string, index: number) => (
-
                         <img src={image} key={index} className={`w-full h-full absolute transition-opacity duration-200 ease-in-out object-cover ${currentIndex === index ? 'opacity-100' : 'opacity-0'}`}
                         />
-
                     ))}
                     {/* <img src="https://media.bunjang.co.kr/product/251168295_2_1706853342_w856.jpg" className="w-full absolute transition-opacity duration-200 ease-in-out opacity-100 object-cover" /> */}
                 </div>
