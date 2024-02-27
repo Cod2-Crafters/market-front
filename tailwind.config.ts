@@ -7,8 +7,16 @@ const config: Config = {
         './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+        './src/features/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     theme: {
+        container: {
+            center: true,
+            padding: '2rem',
+            screens: {
+                '2xl': '1400px',
+            },
+        },
         // 컬러 재정의, 존재하는 컬러만 사용함 (인텔리센스에 영향)
         colors: {
             transparent: 'transparent',
