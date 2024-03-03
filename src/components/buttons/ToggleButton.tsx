@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from '@/components/buttons';
+import { Button, ButtonProps } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -25,7 +25,7 @@ const ToggleButton = ({
 }: ToggleButtonProps) => {
     let bgColor: string;
     const [isActive, setIsActive] = useState<boolean>(defaultToggleValue);
-    const handleOnToggle = (e: React.MouseEvent) => {
+    const handleOnToggle = (event: React.MouseEvent) => {
         setIsActive((prevIsActive) => {
             onToggle(!prevIsActive); // after 값 반환
             return !prevIsActive;
