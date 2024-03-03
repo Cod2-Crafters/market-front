@@ -3,30 +3,59 @@
 @tailwind utilities;
 
 @layer base {
-	:root {
-		--color-primary: #0a790c; /* #0a790c */
-		--color-secondary: #75cb76;
-		font-family: 'Pretendard Regular', system-ui, sans-serif;
-		font-size: 62.5%;
+	input, button, textarea {
+		outline:  none;
+		border: none;
 	}
 }
 
-@media (prefers-color-scheme: dark) { /* darkmode */
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+  }
+  
+  .scrollbar-hide {
+	-ms-overflow-style: none;  /* IE and 엣지 */
+	scrollbar-width: none;  /* 파이어폭스 */
+  }
+
+:root {
+	--primary: 10, 121, 50, 1.0; /*  rgb(10, 121, 12)  #0a790c */
+	--primary-foreground: 255, 255, 255, 1.0; /* #fff */
+
+	--background: 10, 121, 200, 1.0;
+	--foreground: 255, 0, 0, 1.0;
+
+	--secondary: 117, 203, 118, 1.0; /* #75cb76 */
+	--secondary-foreground: 255, 255, 255, 1.0;
+
+	--error: 234, 88, 12, 1.0; /* #EA580C */
+	
+	/* hover */
+	--accent: 117, 203, 118, 1.0;
+    --accent-foreground: 255, 255, 0, 1.0;
+	
+	--radius: 0.5rem;
+
+	--input: 30, 0, 200, 1.0;
+    --ring: 0, 0, 0, 1.0;
+
+	font-family: 'Pretendard Regular', system-ui, sans-serif;
+	font-size: 62.5%;
+}
+
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
+} */
 
 body {
 	font-size: 1.6rem;
 }
 
-input, button {
-  outline:  none;
-  border: none;
-}
+
 
 
 
