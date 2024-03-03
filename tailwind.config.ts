@@ -18,7 +18,6 @@ const config: Config = {
             black: '#000',
             white: '#fff',
             // 커스텀 컬러 모음
-
             primary: {
                 DEFAULT: 'rgb(var(--primary))',
                 foreground: 'rgb(var(--primary-foreground))',
@@ -27,16 +26,9 @@ const config: Config = {
                 DEFAULT: 'hsl(var(--secondary))',
                 foreground: 'hsl(var(--secondary-foreground))',
             },
-            // primary: {
-            //     // DEFAULT: '#0a790c',
-            //     DEFAULT: 'rgb(var(--primary) / 255)',
-            //     foreground: 'rgb(var(--foreground) / 255)',
-            // },
-            // secondary: {
-            //     // DEFAULT: '#75cb76',
-            //     DEFAULT: 'rgb(var(--secondary))',
-            //     foreground: 'rgb(var(--secondary-foreground))',
-            // },
+            error: {
+                DEFAULT: '#EA580C',
+            },
             gray: {
                 '10': '#3A3A3A',
                 '20': '#5A5A5A',
