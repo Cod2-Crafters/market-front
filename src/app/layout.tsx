@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function RootLayout(props: React.PropsWithChildren) {
     return (
         <html lang="en">
-            <body>{props.children}폰트가 테스트</body>
+            <body>{props.children}</body>
         </html>
     );
 }
