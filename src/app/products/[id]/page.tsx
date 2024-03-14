@@ -1,5 +1,7 @@
 import ProductsClient from "@/features/products/ProductsClient";
 import { ProductDetail } from "@/types/Product";
+import React from "react";
+const ProductsClientMemoized = React.memo(ProductsClient);
 
 type paramProductPage = {
     params: {
@@ -26,7 +28,7 @@ async function Products(props: paramProductPage) {
     const postId = props.params.id;
     const data: ProductDetail = await getDetail(postId);
     return (
-        <ProductsClient detailData={data} />
+        <ProductsClientMemoized detailData={data} />
     )
 }
 

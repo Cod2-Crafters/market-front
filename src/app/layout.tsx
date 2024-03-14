@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 
 import './globals.css';
+import Drawer from '@/components/custom/Drawer';
+import StoreProvider from './StoreProvider';
+import DrawerComponent from '@/components/custom/Drawer';
 
 export const metadata: Metadata = {
     title: '태풍마켓',
@@ -10,7 +13,13 @@ export const metadata: Metadata = {
 export default function RootLayout(props: React.PropsWithChildren) {
     return (
         <html lang="en">
-            <body>{props.children}</body>
+            <body>
+                <div id="drawer-root">
+                </div>
+                <StoreProvider children={props.children}>
+
+                </StoreProvider>
+            </body>
         </html>
     );
 }

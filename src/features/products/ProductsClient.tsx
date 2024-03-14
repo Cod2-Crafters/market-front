@@ -5,13 +5,13 @@ import { ProductDetail, ProductImage, ProductMember } from "@/types/Product";
 import { timeSince } from "@/utils/utils";
 import { Button } from "@/components/ui/buttonProduct"
 import { facebook, follow, naver, offHeart, tag } from "@/components/Button/iconSource";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from "@/store/store";
+// import { RootState } from "@/store/store";
 import { openModal } from "@/actions/modalActions";
 import { Drawer, DrawerClose, DrawerContent, DrawerOverlay, DrawerTrigger } from "@/components/ui/drawer";
 import { useAppDispatch, useAppSelector, useAppStore } from "@/hooks/rtkHooks";
-import { closeDrawer, openDrawer } from "../drawer/drawerSlice";
+import { closeDrawer, openDrawer, toggleDrawer } from "../drawer/drawerSlice";
 
 
 
@@ -49,20 +49,17 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
         }
     };
 
-    // const dispatch = useAppDispatch();
-    // const isOpen = useAppSelector((state) => state.drawer.isOpen);
+    const store = useAppStore();
+    const dispatch = useAppDispatch();
 
-    const handleOpenModal = () => {
-        // if (isOpen) {
-        //     dispatch(closeDrawer());
-        // } else {
-        //     dispatch(openDrawer());
-        // }
-    }
+    // 구매하기 버튼 이벤트 핸들러
+    const handlePurchaseClick = () => {
+        dispatch(openDrawer());
+    };
 
 
     return (
-        <main className="flex flex-col items-center justify-between">
+        <div className="flex flex-col items-center justify-between">
             <div>
                 <div className="py-20 flex">
                     <ImageSlide imageList={ProductImageList} />
@@ -134,14 +131,8 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
                                 <Button style={{ backgroundColor: 'rgb(255, 164, 37)' }} size="lg">채팅하기</Button>
                             </div>
                             <div className="relative flex w-[180px] mr-[10px] justify-between h-[56px] items-center">
-                                <Button onClick={handleOpenModal} style={{ backgroundColor: 'rgb(247, 0, 0)' }} size="lg">구매하기</Button>
-                                {/* <Drawer open={isOpen} onOpenChange={handleOpenModal}>
-                                    <DrawerOverlay />
-                                    <DrawerContent>
-                                        <DrawerClose onClick={() => dispatch(closeDrawer())}>닫기</DrawerClose>
-                                        <p>Drawer 내용입니다.</p>
-                                    </DrawerContent>
-                                </Drawer> */}
+                                <Button onClick={handlePurchaseClick} style={{ backgroundColor: 'rgb(247, 0, 0)' }} size="lg">구매하기</Button>
+
                             </div>
                         </div>
                     </div>
@@ -216,7 +207,7 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
 
 
 
-        </main >
+        </div >
     )
 }
 
