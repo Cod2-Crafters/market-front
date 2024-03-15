@@ -42,17 +42,30 @@ const DrawerContent = React.forwardRef<
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
-      className={cn(
-        // "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
-        "fixed top-0 right-0 z-50 w-[300px] h-full flex flex-col bg-background", // Adjusted for right-side appearance
-        className
-      )}
+      className={cn('fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background', className)}
       {...props}
     >
-      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+      {/* {showBar ? <div className='mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted' /> : null} */}
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
+  // <DrawerPortal>
+  //   <DrawerOverlay />
+  //   <DrawerPrimitive.Content
+  //     ref={ref}
+  //     className={cn(
+  //       // "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background",
+  //       // "right-0 z-50 w-1/2 h-full flex flex-col bg-background shadow-lg", // Updated for right-side appearance and width
+  //       "fixed top-0 right-0 z-50 w-1/2 h-full flex flex-col bg-background shadow-lg",
+  //       "bg-red-500", // Temporary for visibility check
+  //       className
+  //     )}
+  //     {...props}
+  //   >
+  //     <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+  //     {children}
+  //   </DrawerPrimitive.Content>
+  // </DrawerPortal>
 ))
 DrawerContent.displayName = "DrawerContent"
 
