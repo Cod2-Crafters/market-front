@@ -20,7 +20,7 @@ import ModalBuyProduct from "./ModalBuyProduct";
 
 const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData }) => {
     const ProductInfo: ProductDetail = detailData;
-    const { title, price, modifyedAt, content, hashtagList } = ProductInfo;
+    const { title, price, modifyedAt, content, hashtagList, bookmarkCount, views } = ProductInfo;
 
     const ProductMember: ProductMember = ProductInfo.member;
     const ProductImageList: ProductImage[] = ProductInfo.imageList;
@@ -56,7 +56,7 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
     const dispatch = useAppDispatch();
 
     const handlePurchaseClick = () => {
-        dispatch(openDrawer(<ModalBuyProduct />));
+        dispatch(openDrawer(<ModalBuyProduct detailData={detailData} />));
     };
 
 
@@ -84,12 +84,12 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
                                         <span>
                                             {sinceTime}</span>
                                     </div>
-                                    {/* <div className="flex items-center h-full">
-                                    조회수
-                                </div>
-                                <div className="flex items-center h-full">
-                                    찜
-                                </div> */}
+                                    <div className="flex items-center h-full text-[#606060] pl-[10px]">
+                                        조회수 {views}
+                                    </div>
+                                    <div className="flex items-center h-full text-[#606060] pl-[10px]">
+                                        찜 {bookmarkCount}
+                                    </div>
                                 </div>
                             </div>
                             <div className="m-0 p-0 border-0 font-inherit align-baseline">
@@ -130,12 +130,11 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
                                 <div className="relative flex w-[180px] mr-[10px] justify-between h-[56px] items-center">
                                     <Button className="" style={{ backgroundColor: 'rgb(204, 204, 204)' }} size="lg">{offHeart()}찜</Button>
                                 </div>
-                                <div className="relative flex w-[180px] mr-[10px] justify-between h-[56px] items-center">
+                                <div className="relative flex w-[180px] mr-[5px] justify-between h-[56px] items-center">
                                     <Button style={{ backgroundColor: 'rgb(255, 164, 37)' }} size="lg">채팅하기</Button>
                                 </div>
-                                <div className="relative flex w-[180px] mr-[10px] justify-between h-[56px] items-center">
+                                <div className="relative flex w-[180px] mr-[5px] justify-between h-[56px] items-center">
                                     <Button onClick={handlePurchaseClick} style={{ backgroundColor: 'rgb(247, 0, 0)' }} size="lg">구매하기</Button>
-
                                 </div>
                             </div>
                         </div>

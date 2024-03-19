@@ -22,6 +22,7 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
         "dayjs": "^1.11.10",
+        "iamport-server-api": "^6.0.6",
         "lucide-react": "^0.334.0",
         "msw": "^2.1.5",
         "next": "13.5.6",
