@@ -7,10 +7,10 @@ import { ProductImage } from "@/types/Product";
 const ImageSlide: React.FC<{ imageList: ProductImage[] }> = ({ imageList }) => {
     //TODO 
     // 서버 컴포넌트 에서 이미지 갖고오고 프랍으로 받기 
-    // const images = imageList.map((item: ProductImage) => item.imagePath);
+    const images = imageList.map((item: ProductImage) => process.env.NEXT_PUBLIC_API_HOST + item.imagePath);
     // 더미 이미지
-    const dummy = ['http://13.125.249.102:8080/api/file/static/d7050866-7fec-41d1-ac6f-694e15271b65.jpg', 'http://13.125.249.102:8080/api/file/static/a832c765-bc6b-4811-8a9e-760c9aedd302.jpg', 'http://13.125.249.102:8080/api/file/static/176f82c0-8bde-4785-9cce-43fa6d2f9d21.jpg'];
-    const images = imageList.map(() => dummy[Math.floor(Math.random() * dummy.length)]);
+    const dummy = ['https://media.bunjang.co.kr/product/246556049_1_1708054149_w856.jpg', 'https://media.bunjang.co.kr/product/246556049_2_1708054149_w856.jpg', 'https://media.bunjang.co.kr/product/246556049_3_1708054149_w856.jpg'];
+    // const images = imageList.map(() => dummy[Math.floor(Math.random() * dummy.length)]);
     // const images = [
     //     'https://media.bunjang.co.kr/product/251168295_1_1706853342_w856.jpg',
     //     'https://media.bunjang.co.kr/product/251168295_2_1706853342_w856.jpg',

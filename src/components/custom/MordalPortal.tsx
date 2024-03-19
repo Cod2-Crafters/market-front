@@ -11,7 +11,6 @@ const Portal = ({ children }: { children: ReactElement }) => {
     }, []);
 
     if (typeof window === "undefined") return <></>;
-    console.log('mount' + mounted);
     return mounted ? createPortal(children, document.getElementById("modal-root") as HTMLElement) : <></>;
 };
 

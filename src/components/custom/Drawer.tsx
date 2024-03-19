@@ -1,5 +1,5 @@
 'use client'
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeDrawer, openDrawer } from '@/features/drawer/drawerSlice';
 import { Drawer as DrawerUI, DrawerTrigger, DrawerContent, DrawerHeader, DrawerFooter, DrawerClose, DrawerTitle, DrawerDescription, Drawer } from "@/components/ui/drawer";
@@ -23,10 +23,21 @@ const DrawerComponent = () => {
         handleClose();
     };
 
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isOpen]);
+
     return isOpen ? (<> <div className="fixed inset-0 z-40 bg-gray-10 bg-opacity-40 flex justify-end items-center" style={{ width: '100%', height: '100%' }} onClick={handleBackdropClick}>
-        <div className="w-1/2 h-full bg-white rounded-lg shadow-xl z-50" onClick={(e) => e.stopPropagation()}>
+        <div className="w-1/2 h-full bg-white rounded-lg shadow-xl z-50 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="p-5">
-                <button className="absolute top-0 right-0 mt-2 mr-2 text-xl font-semibold right-10" onClick={handleClose}>&times;</button>
+                <button className="absolute top-0 mt-2 mr-2 text-xl font-semibold right-10" onClick={handleClose}>&times;</button>
                 {content}
             </div>
         </div>

@@ -1,27 +1,29 @@
 export interface ProductDetail {
     id: number;
-    member: ProductMember
+    member: ProductMember;
     title: string;
     content: string;
-    price : number;
-    createdAt : Date;
-    modifyedAt : string;
+    price: number;
+    createdAt: Date;
+    modifyedAt: string;
     status: string;
     hashtagList: string[];
     deleted: boolean;
+    views: any;
+    bookmarkCount: number;
     imageList: ProductImage[];
-  }
-  
-  export interface ProductMember {
+}
+
+export interface ProductMember {
     id: number;
     email: string;
     shopName: string;
     logoPath: string | null;
     createdAt: string;
-  }
+}
 
-  export interface ProductImage {
-      id: number;
-      imagePath: string;
-      isThumbnail: boolean;
-  }
+export interface ProductImage {
+    id: number;
+    imagePath: string;
+    isThumbnail: boolean;
+}

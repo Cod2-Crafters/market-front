@@ -65,6 +65,7 @@ const config: Config = {
         },
         spacing: {
             none: '0',
+            '0': '0',
             '1': '0.1rem',
             '2': '0.2rem',
             '4': '0.4rem',
@@ -85,12 +86,12 @@ const config: Config = {
         },
         fontSize: {
             base: '1.4rem' /* default dsize, same md */,
-            sm: '1.2rem',
+            sm: '1.2rem' /* DISABLE */,
             md: '1.4rem',
             lg: '1.6rem',
-            xl: '1.8rem',
+            xl: '2.0rem',
             '2xl': '2.4rem',
-            '3xl': '3.6rem',
+            '3xl': '3.4rem',
             '4xl': '4.8rem',
         },
         extend: {
