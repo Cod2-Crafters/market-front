@@ -6,11 +6,13 @@ import { cva } from 'class-variance-authority';
 import * as React from 'react';
 
 const buttonVariants = cva(
-  'disabled:opacity-50 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm transition-colors focus-visible:outline-none disabled:pointer-events-none',
+  'disabled:opacity-50 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm transition-colors disabled:pointer-events-none',
   {
     variants: {
       variant: {
-        default: 'border-0 bg-primary text-white',
+        default: 'border-0 bg-primary text-white focus-visible:outline-none ',
+        outline:
+          'border border-solid border-black hover:border-transparent hover:bg-secondary hover:text-black focus-visible:outline-none',
         // destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         // outline: 'border-input bg-background hover:bg-accent hover:text-accent-foreground border',
         // secondary: 'text-secondary-foreground bg-secondary hover:bg-secondary/80',
@@ -19,6 +21,8 @@ const buttonVariants = cva(
       },
       size: {
         default: 'px-8 py-2',
+        full: 'w-full py-8',
+        lg: 'px-16 py-4',
         // sm: 'h-9 px-3 rounded-md',
         // lg: 'h-11 rounded-md px-8',
         // icon: 'h-10 w-10',
