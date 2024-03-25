@@ -1,7 +1,6 @@
 'use client';
 
 import type { DialogContentTypes } from '@/types/Dialogs';
-
 import LoginPopup from './LoginPopup';
 import RegisterPopup from './RegisterPopup';
 import SelectLoginPopup from './SelectLoginPopup';
