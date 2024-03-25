@@ -1,13 +1,12 @@
 'use client';
 
-import type { DialogContentTypes } from '@/app';
-
+import type { DialogContentTypes } from '@/types/Dialogs';
 import LoginPopup from './LoginPopup';
 import RegisterPopup from './RegisterPopup';
 import SelectLoginPopup from './SelectLoginPopup';
 
-import { IOpenDialog } from '@/app';
 import { cn } from '@/lib/utils';
+import { IOpenDialog } from '@/types/Dialogs';
 import { Dispatch, Fragment, ReactNode, SetStateAction, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -75,7 +74,7 @@ const BackDrop = ({ children, className }: BackDropProps) => {
     return (
         <div
             id="modal-backdrop"
-            className={cn('left-0 top-0 scrollbar-hide fixed h-full w-full bg-black bg-opacity-80', className)}
+            className={cn('scrollbar-hide fixed left-0 top-0 h-full w-full bg-black bg-opacity-80', className)}
         >
             {children}
         </div>

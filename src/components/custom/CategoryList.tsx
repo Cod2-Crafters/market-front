@@ -1,50 +1,94 @@
 'use client';
 
-import { ICategory } from './CategoryData';
-
 import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 type TCategoryList = {
-    categories: ICategory[];
+    name?: string;
     className?: string;
+    setCategory?: Dispatch<SetStateAction<CategoryState | undefined>>;
+    selectedCategory: CategoryState | undefined;
 };
 
-const CategoryList = ({ categories, className }: TCategoryList) => {
-    const [selectMainCateogry, setSelectMainCategory] = useState<ICategory>();
-    const [selectSubCategory, setSelectSubCategory] = useState<ICategory>();
+function getIPFromServer() {
+    const FALLBACK_IP_ADDRESS = '0.0.0.0';
+    // const forwardedFor = headers().get('x-forwarded-for');
+
+    // if (forwardedFor) {
+    //     return forwardedFor.split(',')[0] ?? FALLBACK_IP_ADDRESS;
+    // }
+
+    // return headers().get('x-real-ip') ?? FALLBACK_IP_ADDRESS;
+    return FALLBACK_IP_ADDRESS;
+}
+
+async function getCategories() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/category/list`, {
+        method: 'GET',
+        cache: 'no-cache',
+        headers: {
+            'x-forwarded-for': getIPFromServer(),
+        },
+    });
+    console.log('categories');
+    return res.json();
+}
+
+const CategoryList = ({ name, className, selectedCategory }: TCategoryList) => {
+    const [selectMainCateogry, setSelectMainCategory] = useState<CategoryState>();
+    const [selectSubCategory, setSelectSubCategory] = useState<CategoryState>();
+
+    const [categories, setCategories] = useState<CategoryState[]>();
+
+    const { setValue } = useFormContext();
+
+    const fetchCategories = async () => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/api/category/list`, {
+            method: 'GET',
+            cache: 'no-cache',
+            headers: {
+                'x-forwarded-for': getIPFromServer(),
+            },
+        });
+        setCategories(await res.json());
+    };
+
+    useEffect(() => {
+        fetchCategories();
+    }, []);
+
     return (
         <>
             {/* 카테고리 선택 */}
             <div className={cn('flex flex-1 flex-row flex-nowrap border-2 border-gray-10', className)}>
                 <ul className="h-[100px] w-full overflow-y-scroll">
-                    {categories.map((mainCategoryItem) => {
-                        return (
-                            <li
-                                key={mainCategoryItem.id}
-                                data-id={mainCategoryItem.id}
-                                className={cn('w-full cursor-pointer py-4 hover:bg-gray-80', {
-                                    'bg-secondary hover:bg-secondary': selectMainCateogry?.id == mainCategoryItem.id,
-                                })}
-                                onClick={(event) => {
-                                    if (event.currentTarget != null) {
-                                        if (mainCategoryItem.id == Number(event.currentTarget.dataset.id)) {
-                                            console.log(event.currentTarget.dataset.id);
-                                            setSelectMainCategory(() => {
-                                                return { ...mainCategoryItem };
-                                            });
-                                            setSelectSubCategory(() => {
-                                                return undefined;
-                                            });
+                    {categories &&
+                        categories.map((mainCategoryItem) => {
+                            return (
+                                <li
+                                    key={mainCategoryItem.id}
+                                    data-id={mainCategoryItem.id}
+                                    className={cn('w-full cursor-pointer py-4 hover:bg-gray-80', {
+                                        'bg-primary text-white hover:bg-primary':
+                                            selectMainCateogry?.id == mainCategoryItem.id,
+                                    })}
+                                    onClick={(event) => {
+                                        if (event.currentTarget != null) {
+                                            if (mainCategoryItem.id == Number(event.currentTarget.dataset.id)) {
+                                                // console.log('categoryList SelectedID:', event.currentTarget.dataset.id);
+                                                setSelectMainCategory({ ...mainCategoryItem });
+                                                setSelectSubCategory(undefined);
+                                                name && setValue(name, mainCategoryItem);
+                                            }
                                         }
-                                    }
-                                }}
-                            >
-                                {mainCategoryItem.name}
-                                {/* {mainCategoryItem.name} */}
-                            </li>
-                        );
-                    })}
+                                    }}
+                                >
+                                    {mainCategoryItem.name}
+                                    {/* {mainCategoryItem.name} */}
+                                </li>
+                            );
+                        })}
                 </ul>
                 {/* 중분류 */}
                 {selectMainCateogry?.child == undefined && (
@@ -58,13 +102,13 @@ const CategoryList = ({ categories, className }: TCategoryList) => {
                                 <li
                                     key={subCategoryItem.id}
                                     className={cn('w-full cursor-pointer py-4 hover:bg-gray-80', {
-                                        'bg-secondary hover:bg-secondary': selectSubCategory?.id == subCategoryItem.id,
+                                        'bg-primary text-white hover:bg-primary':
+                                            selectSubCategory?.id == subCategoryItem.id,
                                     })}
                                     data-id={subCategoryItem.id}
                                     onClick={(event) => {
-                                        setSelectSubCategory(() => {
-                                            return { ...subCategoryItem };
-                                        });
+                                        setSelectSubCategory({ ...subCategoryItem });
+                                        name && setValue(name, subCategoryItem);
                                     }}
                                 >
                                     {subCategoryItem.name}
@@ -75,11 +119,18 @@ const CategoryList = ({ categories, className }: TCategoryList) => {
                 )}
             </div>
 
+            <p className="text-primary">
+                <span>선택한 카테고리:</span>
+                <b>{selectedCategory && selectedCategory.name}</b>
+            </p>
+            {/* 
             <div>
                 선택값: {selectMainCateogry?.name}
                 {selectSubCategory != undefined && '>'}
-                {selectSubCategory?.name}{' '}
+                {selectSubCategory?.name}{' '} 
+                {selectedCategory && selectedCategory.name}
             </div>
+                */}
         </>
     );
 };

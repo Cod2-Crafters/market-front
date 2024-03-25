@@ -7,7 +7,6 @@ import { useState } from 'react';
 // toggle 상태값 별 다른 색상 처리 진행
 
 interface ToggleButtonProps extends ButtonProps {
-    className: string;
     defaultToggleValue?: boolean;
     text: string;
     tailComponent?: React.ReactNode;

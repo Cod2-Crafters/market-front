@@ -7,9 +7,9 @@ import { Button } from '../ui/button';
 import { Form, FormControl, FormField } from '../ui/form';
 import { HintInput } from '../ui/hintinput';
 
-import { IOpenDialog } from '@/app';
 import { setMember } from '@/features/members/memberSlice';
 import { cn } from '@/lib/utils';
+import { IOpenDialog } from '@/types/Dialogs';
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
