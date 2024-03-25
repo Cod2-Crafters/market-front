@@ -37,7 +37,7 @@ const ToggleButton = ({
                 (bgColor = cn(
                     '',
                     {
-                        ['bg-primary']: isActive === false,
+                        ['bg-error bg-primary']: isActive === false,
                         ['bg-indigo-900']: isActive === true,
                     },
                     {
