@@ -25,6 +25,7 @@ const PortalWithNoSSR = dynamic(
 export default function RootLayout(props: React.PropsWithChildren) {
     return (
         <html lang="en">
+
             <body>
                 <StoreProvider>
                     <div id='modal-root' />
@@ -32,6 +33,8 @@ export default function RootLayout(props: React.PropsWithChildren) {
                         <DrawerComponentWithNoSSR />
                     </PortalWithNoSSR>
                     {props.children}
+                    <div id="portal"></div>
+
                 </StoreProvider>
             </body>
             {/* <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script> */}
