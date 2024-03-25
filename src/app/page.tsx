@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import ToggleGroupButton from '@/components/buttons/ToggleGroupButton';
 import CategoryData from '@/components/custom/CategoryData';
 import { ProductFormNameInput } from '@/components/custom/ProductFormNameInput';
@@ -5,6 +6,10 @@ import ProductFormPriceInput from '@/components/custom/ProductFormPriceInput';
 import ProductFormTagInput from '@/components/custom/ProductFormTagInput';
 import FileUploader from '@/components/Files/FileUploader';
 import Icon from '@/components/icons/Icon';
+=======
+'use client';
+
+>>>>>>> Stashed changes
 import Header from '@/components/page/Header';
 import DescTextarea from '@/components/texts/DescTextarea';
 import SectionWrapper from '@/components/wrappers/SectionWrapper';
@@ -42,6 +47,10 @@ export default async function Home() {
     // let categorylist: ICategory[] = await getCategories();
     return (
         <>
+<<<<<<< Updated upstream
+=======
+            <Header />
+>>>>>>> Stashed changes
             <div className="flex min-w-[1236px] flex-col">
                 <Header />
                 <main className="flex flex-col items-center">
@@ -104,9 +113,13 @@ export default async function Home() {
                             <br />
                         </div>
                     </div>
+<<<<<<< Updated upstream
                     {/* <FlyOut>
                         <FlyOutToggle></FlyOutToggle>
                     </FlyOut> */}
+=======
+                    {/* <ProductCardList /> */}
+>>>>>>> Stashed changes
                 </main>
                 {/* <footer className="mt-30 m-auto flex h-24 w-full max-w-screen-lg flex-col bg-orange-300">
                     이 영역은 푸터입니다
