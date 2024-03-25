@@ -4,8 +4,8 @@ import Icon from '../icons/Icon';
 import { HeadText } from '../texts/HeadText';
 import { Button } from '../ui/button';
 
-import { IOpenDialog } from '@/app';
 import { cn } from '@/lib/utils';
+import { IOpenDialog } from '@/types/Dialogs';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
