@@ -75,7 +75,7 @@ const BackDrop = ({ children, className }: BackDropProps) => {
     return (
         <div
             id="modal-backdrop"
-            className={cn('scrollbar-hide fixed left-0 top-0 h-full w-full bg-black bg-opacity-80', className)}
+            className={cn('scrollbar-hide left-0 top-0 fixed h-full w-full bg-black bg-opacity-80', className)}
         >
             {children}
         </div>

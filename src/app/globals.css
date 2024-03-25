@@ -18,17 +18,21 @@
 	scrollbar-width: none;  /* 파이어폭스 */
   }
 
-:root {
-	--primary: 10, 121, 50, 1.0; /*  rgb(10, 121, 12)  #0a790c */
+  :root {
+	--primary: 14, 33, 161, 1.0; /*  rgb(10, 121, 12)  #0E21A1 rgb(14, 33, 161) */
+	--primary-variant: 2, 22, 57, 1.0 /* #021639 rgb(2, 22, 57) */
+	
 	--primary-foreground: 255, 255, 255, 1.0; /* #fff */
 
 	--background: 10, 121, 200, 1.0;
 	--foreground: 255, 0, 0, 1.0;
 
-	--secondary: 117, 203, 118, 1.0; /* #75cb76 */
+	--secondary: 238, 198, 67, 1.0; /* rgb(238, 198, 67) */
+	--secondary-variant: 27, 25, 26, 1.0; /* #1B191A rgb(27, 25, 26) */
+
 	--secondary-foreground: 255, 255, 255, 1.0;
 
-	--error: 234, 88, 12, 1.0; /* #EA580C */
+	--error: 176, 0, 32, 1.0; /* #EA580C, #B00020 rgb(176, 0, 32) */
 	
 	/* hover */
 	--accent: 117, 203, 118, 1.0;
@@ -54,6 +58,16 @@
 body {
 	font-size: 1.6rem;
 }
+
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+  }
+  
+  .scrollbar-hide {
+	-ms-overflow-style: none;  /* IE and 엣지 */
+	scrollbar-width: none;  /* 파이어폭스 */
+  }
 
 
 

@@ -18,6 +18,18 @@ const config: Config = {
             },
         },
         // 컬러 재정의, 존재하는 컬러만 사용함 (인텔리센스에 영향)
+        fontFamily: {
+            pretendard: [
+                'Pretendard Regular',
+                'system-ui',
+                'sans-serif',
+                'Apple Color Emoji',
+                'Segoe UI Emoji',
+                'Segoe UI Symbol',
+                'Noto Color Emoji',
+            ],
+            // Add more custom font families as needed
+        },
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
@@ -65,6 +77,7 @@ const config: Config = {
         },
         spacing: {
             none: '0',
+            '0': '0',
             '1': '0.1rem',
             '2': '0.2rem',
             '4': '0.4rem',
@@ -85,19 +98,20 @@ const config: Config = {
         },
         fontSize: {
             base: '1.4rem' /* default dsize, same md */,
-            sm: '1.2rem',
+            sm: '1.2rem' /* DISABLE */,
             md: '1.4rem',
             lg: '1.6rem',
-            xl: '1.8rem',
+            xl: '2.0rem',
             '2xl': '2.4rem',
-            '3xl': '3.6rem',
+            '3xl': '3.4rem',
             '4xl': '4.8rem',
         },
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: 'rgb(var(--primary))',
+                    DEFAULT: '#0E21A1', // DEFAULT: 'rgb(var(--primary))',
                     foreground: 'rgb(var(--primary-foreground))',
+                    variant: '#021639',
                 },
                 secondary: {
                     DEFAULT: 'rgb(var(--secondary))',
