@@ -28,7 +28,7 @@ function RecommandSlide() {
 
 
     return (
-        <div className="relative mt-[30px]  max-w-full">
+        <div className="relative   max-w-full border-solid border-r-[1px] border-r-gray-50">
             <div className="flex mb-[30px] justify-between">
                 <div className="flex items-center text-[18px] font-medium">
                     이런 상품은 어때요?

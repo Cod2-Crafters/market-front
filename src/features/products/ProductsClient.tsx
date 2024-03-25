@@ -5,26 +5,28 @@ import { ProductDetail, ProductImage, ProductMember } from "@/types/Product";
 import { timeSince } from "@/utils/utils";
 import { Button } from "@/components/ui/buttonProduct"
 import { facebook, follow, naver, offHeart, tag } from "@/components/Button/iconSource";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 // import { RootState } from "@/store/store";
 import { openModal } from "@/actions/modalActions";
 import { Drawer, DrawerClose, DrawerContent, DrawerOverlay, DrawerTrigger } from "@/components/ui/drawer";
 import { useAppDispatch, useAppSelector, useAppStore } from "@/hooks/rtkHooks";
 import { closeDrawer, openDrawer, toggleDrawer } from "../drawer/drawerSlice";
-import DrawerComponent from "@/components/custom/Drawer";
-import Portal from "@/components/custom/MordalPortal";
 import ModalBuyProduct from "./ModalBuyProduct";
+import Link from "next/link";
+
+const devUrl = process.env.NEXT_PUBLIC_API_HOST;
 
 
 
 const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData }) => {
     const ProductInfo: ProductDetail = detailData;
     const { title, price, modifyedAt, content, hashtagList, bookmarkCount, views } = ProductInfo;
-
+    const [products, setProducts] = useState([]);
     const ProductMember: ProductMember = ProductInfo.member;
     const ProductImageList: ProductImage[] = ProductInfo.imageList;
 
+    // const []
     const formattedPrice = formatPrice(price);
     console.log(detailData);
     function formatPrice(price: number): string {
@@ -34,7 +36,7 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
 
     // 팔로우 버튼 클릭 이벤트 핸들러
     const handleFollowClick = async (followId: number) => {
-        const url = `http://13.125.249.102:8080/api/follow/${followId}`;
+        const url = devUrl + `/api/follow/${followId}`;
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -58,6 +60,33 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
     const handlePurchaseClick = () => {
         dispatch(openDrawer(<ModalBuyProduct detailData={detailData} />));
     };
+
+    useEffect(() => {
+        const getSimpleData = async (MemberId: number) => {
+            const url = devUrl + `/api/shop/${MemberId}/simple`;
+            console.log(url);
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        // 필요한 경우 인증 헤더 등 추가
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('상점 정보 요청 실패');
+                }
+                const res = await response.json();
+                console.log(res.simplePostDtoList);
+                setProducts(res.simplePostDtoList);
+                // console.log(response.json());
+                // console.log('팔로우 성공');
+            } catch (error) {
+                // console.error('팔로우 요청 중 오류 발생', error);
+            }
+        };
+        getSimpleData(ProductMember.id);
+    }, []);
 
 
     return (
@@ -148,7 +177,7 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
                     </Button> */}
                     </div>
                     <div className="flex h-[500px]">
-                        <div className="flex-grow flex-shrink basis-0">
+                        <div className="flex-grow flex-shrink basis-0 ">
                             <div className="pr-[30px] h-full border-solid border-r-[1px] border-r-gray-50">
                                 <div>
                                     <div className="text-[18px] p-[48px] pb-[16px] border-b border-gray-50">상품정보</div>
@@ -177,7 +206,7 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
                                 </div>
 
                             </div>
-
+                            <RecommandSlide />
                         </div>
                         <div className="w-[330px]">
                             <div className="h-full border-r border-gray-200 pr-[32px] pl-[32px] pb-[118px] relative">
@@ -189,7 +218,11 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
                                                 <img src="https://media.bunjang.co.kr/images/crop/982324112_w96.jpg" width="48" height="48" className="rounded-full" alt="판매자 프로필 이미지" />
                                             </a>
                                             <div>
-                                                <a className="block mt-[4px] mb-[11px]">{ProductMember.shopName}</a>
+                                                <a className="block mt-[4px] mb-[11px]">
+                                                    <Link href={`/shop/${ProductMember.shopName}`}>
+                                                        {ProductMember.shopName}
+                                                    </Link>
+                                                </a>
                                                 <div className="flex">
                                                     <a className="relative mr-[17px] text-[13px] text-gray-600">상품 39</a>
                                                     <a className="relative mr-[17px] text-[13px] text-gray-600">팔로워 1439</a>
@@ -198,11 +231,24 @@ const ProductsClient: React.FC<{ detailData: ProductDetail }> = ({ detailData })
                                         </div>
                                         <Button onClick={() => handleFollowClick(ProductMember.id)} className="w-full bg-gray-50">{follow()}팔로우</Button>
                                     </div>
+                                    <div className="flex flex-wrap pt-[20px] -mx-2">
+                                        {products.map((product: any, index) => (
+                                            <div key={index} className="w-1/2 px-2 mb-4"> {/* 각 이미지를 감싸는 div에 패딩을 적용하여 간격을 조정합니다. */}
+                                                <div className="flex flex-col">
+                                                    <Link href={`/products/${product.id}`}>
+                                                        <img src={devUrl + product.thumbnailPath} className="w-full h-[100px] object-cover cursor-pointer" />
+                                                    </Link>
+                                                    <p className="text-[13px]">{formatPrice(product.price)}원</p>
+                                                </div>
+                                            </div>
+                                        ))}
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <RecommandSlide />
+                    {/* <RecommandSlide /> */}
 
 
                 </div>
