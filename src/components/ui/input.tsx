@@ -17,7 +17,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         'flex w-full flex-row items-center justify-start rounded-md border border-gray-50 px-8 py-4 text-md focus-within:border-secondary hover:border-secondary focus-visible:border-secondary',
                         { [`bg-gray-70`]: props.disabled == true },
                         {
-                            [`focus-within:border-error hover:border-error focus-visible:border-error`]:
+                            [`border-error focus-within:border-error hover:border-error focus-visible:border-error`]:
                                 isError == true,
                         },
                         className

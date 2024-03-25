@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+/src/components/disable
+/src/app/test/*
+
 # testing
 /coverage
 
@@ -33,3 +36,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/src/app/test*/*
+src/components/wrappers/FlyOut.tsx

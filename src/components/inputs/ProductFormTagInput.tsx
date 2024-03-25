@@ -1,13 +1,19 @@
 'use client';
 
 import Icon from '../icons/Icon';
-import { Input } from '../ui/input';
+import TextField from '../textfield/TextField';
 
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { ChangeEventHandler, Dispatch, Fragment, SetStateAction, useEffect, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-type Props = {};
-
-const maxTagLength = 5;
+type Props = {
+    feature?: 'displayTextLength' | 'inputPrice' | 'inputHashtag' | 'none';
+    inputTagText: string; // [!] form에서..
+    tags: Array<string> | undefined;
+    setInputTagText: Dispatch<SetStateAction<string>>;
+    onChange3?: ChangeEventHandler<HTMLInputElement> | undefined;
+};
+const MAX_TAG_LIST_SIZE = 5;
 
 const dbTagList = [
     // 21개
@@ -45,10 +51,11 @@ function usePrevious<T>(value: T) {
     return ref.current;
 }
 
-const ProductFormTagInput = (props: Props) => {
+const ProductFormTagInput = ({ inputTagText, setInputTagText, onChange3, tags, feature }: Props) => {
+    const { setValue } = useFormContext();
+
     const [tagList, setTagList] = useState<string[]>([]);
-    const [tagText, setTagText] = useState<string>('');
-    const filteredTags = dbTagList.filter((filterDBTagItem) => filterDBTagItem.includes(tagText));
+    const filteredTags = dbTagList.filter((filterDBTagItem) => filterDBTagItem.includes(inputTagText));
 
     const refTagListBox = useRef<HTMLUListElement>(null);
 
@@ -57,9 +64,11 @@ const ProductFormTagInput = (props: Props) => {
     const appendTag = (appedTagItem: string) => {
         // - maxTagLength 개수까지 태그 추가 가능
         // -중복태그 추가 방지
-        if (!tagList.includes(appedTagItem) && tagList.length < maxTagLength) {
-            setTagList(() => {
-                return [...tagList, appedTagItem];
+        if (!tagList.includes(appedTagItem) && tagList.length < MAX_TAG_LIST_SIZE) {
+            setTagList((prevTagList) => {
+                const newTagList = [...prevTagList, appedTagItem];
+                setValue('hashTagList', newTagList);
+                return newTagList;
             });
         }
     };
@@ -72,29 +81,32 @@ const ProductFormTagInput = (props: Props) => {
     }, [Number(prevTagListCount) < tagList.length && tagList.length != 0]);
 
     return (
-        <Fragment>
-            <Input
+        <>
+            <TextField
+                feature="none"
+                type="text"
+                variantType="productRegisterForm"
                 onKeyDown={(event) => {
+                    console.log('tag-keydown2');
+                    // handleInputTagKeyDown(event);
                     if (/^[ㄱ-ㅎ가-힣a-zA-Z0-9\b,]+$/.test(event.key) == false) {
                         event.preventDefault();
                     } else if (event.key == ',') {
-                        console.log('keydown', event.currentTarget.value);
-                        setTagText(() => '');
-                        if (0 < tagText.length) {
-                            setTagList((prevTagList) => {
-                                appendTag(tagText);
-                                return prevTagList;
-                            });
-                        }
+                        appendTag(inputTagText);
+                        setInputTagText('');
                         event.preventDefault();
                     }
                 }}
                 onChange={(event) => {
-                    setTagText(event.currentTarget.value);
+                    console.log('level2-onchange:', event.currentTarget.value);
+                    setInputTagText(event.currentTarget.value);
+                    event.preventDefault();
+                    //onChange3 && onChange3(event);
                 }}
-                value={tagText}
-                placeholder={`태그를 입력해주세요 (최대 ${maxTagLength}개)`}
-                headcomponent={
+                setInputText={setInputTagText}
+                value={inputTagText}
+                placeholder={`태그를 입력해주세요 (최대 ${MAX_TAG_LIST_SIZE}개)`}
+                innerNode={
                     // 직접 추가한 태그
                     0 < tagList.length && (
                         <ul
@@ -105,15 +117,19 @@ const ProductFormTagInput = (props: Props) => {
                                 return (
                                     <li
                                         key={tagItem}
-                                        className="mx-2 inline-flex rounded-2xl bg-secondary px-4 text-white"
+                                        className="mr-4 inline-flex rounded-2xl bg-primary-variant px-4 text-white"
                                     >
                                         <button
                                             className="flex items-center justify-between"
                                             id={`tag-${tagItem}`}
                                             onClick={() => {
-                                                setTagList(() =>
-                                                    tagList.filter((filterTagItem) => tagItem !== filterTagItem)
-                                                );
+                                                setTagList(() => {
+                                                    const newTagList = tagList.filter(
+                                                        (filterTagItem) => tagItem !== filterTagItem
+                                                    );
+                                                    setValue('hashTagList', newTagList);
+                                                    return newTagList;
+                                                });
                                             }}
                                         >
                                             <p className="px-2 text-md">{tagItem}</p>
@@ -128,9 +144,9 @@ const ProductFormTagInput = (props: Props) => {
             />
 
             {/* 태그 검색 */}
-            {0 < tagText.length && (
+            {0 < inputTagText.length && (
                 <>
-                    <ul className="-mt-2 flex max-h-[300px] flex-col gap-5 overflow-y-auto whitespace-nowrap border border-gray-50 bg-white p-4 shadow-lg">
+                    <ul className="absolute -mt-2 flex max-h-[300px] w-full flex-col gap-4 overflow-y-auto whitespace-nowrap border border-gray-50 bg-white p-4 shadow-lg">
                         {filteredTags.map((dbTagItem, dbTagItemIndex) => {
                             const tagValue = dbTagItem || '연관된 아이템이 없습니다.';
                             return (
@@ -138,8 +154,8 @@ const ProductFormTagInput = (props: Props) => {
                                     <li
                                         className="p-4 hover:bg-gray-60"
                                         onClick={(event) => {
-                                            appendTag(event.currentTarget.innerText);
-                                            setTagText('');
+                                            appendTag(dbTagItem);
+                                            setInputTagText('');
                                         }}
                                     >
                                         {tagValue}
@@ -151,7 +167,7 @@ const ProductFormTagInput = (props: Props) => {
                     </ul>
                 </>
             )}
-        </Fragment>
+        </>
 
         // .map((dbTagItem) => {
         //     return (
@@ -172,5 +188,3 @@ const ProductFormTagInput = (props: Props) => {
 };
 
 export default ProductFormTagInput;
-
-ProductFormTagInput.Test = ProductFormTagInput;
