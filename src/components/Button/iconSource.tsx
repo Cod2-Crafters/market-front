@@ -29,3 +29,7 @@ export function follow() {
 export function tag() {
 	return <Icon icon="mdi:tag" />;
 }
+
+export function filterImg() {
+	return <Icon icon="mi:filter" />
+}
