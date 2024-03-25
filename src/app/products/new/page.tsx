@@ -10,7 +10,6 @@ import ErrorText from '@/components/texts/ErrorText';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField } from '@/components/ui/form';
 import SectionWrapper from '@/components/wrappers/SectionWrapper';
-import { RadioButtonState } from '@/types/UserInterface';
 import { Fragment, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -424,7 +423,7 @@ export default function ProductsNew() {
                                         </FormControl>
                                     )}
                                 />
-*/}
+                                 */}
 
                                 <FormField
                                     control={productForm.control}

@@ -1,18 +1,11 @@
 'use client';
 
+import { ProductTradeItemState, ToggleButtonItemState } from '../../types/UserInterface';
 import { HeadText } from '../texts/HeadText';
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group';
 
-import { useId, useState } from 'react';
-
-type TDataArray = {
-    title: string;
-    items: Array<TDataItem>;
-};
-type TDataItem = {
-    value: string;
-    text: string;
-};
+import { ToggleButtonState } from '@/types/UserInterface';
+import { useId } from 'react';
 
 // const dataArray: TDataArray = {
 //     title: '지불종류',
@@ -24,11 +17,13 @@ type TDataItem = {
 //     ],
 // };
 
-const ToggleGroupButton = ({ title, items }: TDataArray) => {
-    const [toggleValue, setToggleValue] = useState<string>();
+type ToggleButtonItemTypes = ToggleButtonItemState | ProductTradeItemState;
+const ToggleGroupButton = ({ title, items, selectedValue, setValue }: ToggleButtonState<ToggleButtonItemTypes>) => {
+    //const [toggleSelectedValue, setToggleSelectedValue] = useState<string>();
+
     return (
         <>
-            <HeadText className={'text-gray-30'} size={'lg'}>
+            <HeadText className={'text-gray-30'} size={'xl'}>
                 <b>{title}</b>
             </HeadText>
             <ToggleGroup
@@ -37,12 +32,12 @@ const ToggleGroupButton = ({ title, items }: TDataArray) => {
                 defaultChecked={true}
                 onValueChange={(selectValue) => {
                     if (selectValue == '') {
-                        // 선택취소 방지
+                        // 계속 선택 취소 방지
                         return false;
                     }
-                    setToggleValue(() => selectValue);
+                    setValue(selectValue);
                 }}
-                value={toggleValue}
+                value={selectedValue}
             >
                 {items?.map((item) => {
                     return (

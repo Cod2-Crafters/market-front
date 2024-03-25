@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 
 type TDefaultHead = Omit<React.InputHTMLAttributes<HTMLHeadingElement>, 'size'>; // 기존 size 속성 제거 후 재정의
 interface HeadTextProps extends TDefaultHead {
-    size: 'lg' | 'sm';
+    size: 'lg' | 'sm' | 'xl' | '2xl';
     children: ReactNode;
 }
 
@@ -14,15 +14,16 @@ type HeadingTagType = {
 };
 
 // 사이즈별 조정 가능
-const headTextVariants = cva('text-gray-30 [&>b]:text-lg', {
+const headTextVariants = cva('text-lg text-gray-30', {
     variants: {
         size: {
+            '2xl': 'text-2xl',
             xl: 'text-xl',
             lg: 'text-lg',
             sm: 'text-sm',
         },
         default: {
-            size: 'large',
+            size: 'lg',
         },
     },
 });
