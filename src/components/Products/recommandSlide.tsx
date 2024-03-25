@@ -20,15 +20,15 @@ function RecommandSlide() {
         'https://media.bunjang.co.kr/product/251168295_2_1706853342_w856.jpg',
     ]
     // const { currentIndex, goNext, goPrev } = useImageSlider(images);
-    const { currentIndex, goNext, goPrev, totalPages } = useRecommandSlider(images, 6);
-    const itemsPerPage = 6;
+    const itemsPerPage = 5;
+    const { currentIndex, goNext, goPrev, totalPages } = useRecommandSlider(images, itemsPerPage);
     const startIndex = currentIndex * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentItems = images.slice(startIndex, endIndex);
 
 
     return (
-        <div className="relative mt-[30px]">
+        <div className="relative mt-[30px]  max-w-full">
             <div className="flex mb-[30px] justify-between">
                 <div className="flex items-center text-[18px] font-medium">
                     이런 상품은 어때요?
@@ -37,7 +37,7 @@ function RecommandSlide() {
             </div>
             <div className="flex flex-wrap">
                 {currentItems.map((image: string, index: number) => (
-                    <div key={index} className="w-[159px] mr-[14px] flex-shrink-0 overflow-hidden">
+                    <div key={index} className="w-[159px] mr-[14px] flex-shrink-0 overflow-hidden min-w-[150px]">
                         <a className="relative cursor-pointer">
                             <div className="relative">
                                 <img src={image} alt="product img" className="w-full block" />
